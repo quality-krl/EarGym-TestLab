@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Kirill Kovalevski — Pitch Profile</title>
+    <meta
+      name="description"
+      content="A bilingual ear-training mini product by Kirill Kovalevski: test your pitch, learn a skill, and meet the musician behind it."
+    />
+    <meta name="theme-color" content="#0B0500" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <input class="langState" type="radio" name="lang" id="lang-en" checked />
+    <input class="langState" type="radio" name="lang" id="lang-he" />
+
+    <header class="topbar">
+      <div class="wrap topbar__row">
+        <!-- Keep brand + toggle as direct children of .topbar__row (so CSS can deterministically swap sides) -->
+        <div class="brand topbar__brand" aria-label="Site identity">
+          <div class="brand__mark" aria-hidden="true">
+            <span class="markLang markLang--en">K</span>
+            <span class="markLang markLang--he" lang="he" dir="rtl">ק</span>
+          </div>
+
+          <div class="brand__text">
+            <div class="brand__title">
+              <span class="hdrLang hdrLang--en">Kirill Kovalevski</span>
+              <span class="hdrLang hdrLang--he" lang="he" dir="rtl">קיריל קובלבסקי</span>
+            </div>
+            <div class="brand__sub">
+              <span class="hdrLang hdrLang--en">Pitch Profile • Ear Trainer</span>
+              <span class="hdrLang hdrLang--he" lang="he" dir="rtl">פרופיל שמיעה • מאמן אוזן</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lang topbar__lang" aria-label="Language toggle">
+          <label class="lang__btn" for="lang-en" data-lang="en" aria-label="Switch language to English">EN</label>
+          <label class="lang__btn" for="lang-he" data-lang="he" aria-label="החלף שפה לעברית">HE</label>
+          <span class="lang__pill" aria-hidden="true"></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <section class="wrap hero">
+        <div class="hero__copy panel prose">
+          <div class="langView langView--en">
+            <h1 class="h1">Test your ear in 60 seconds — and learn why it changed my playing.</h1>
+            <p class="lead measure">
+              I’m Kirill. I spent years grinding guitar technique, but I underestimated a quieter superpower: recognizing notes quickly.
+              That “inner ear” gives you more freedom — less guessing, more expression.
+            </p>
+
+            <p class="qaNote measure">
+              Music basically trained my QA brain early: your ear is a live test runner. If something is slightly “off,” you feel it.
+              Same in software — one edge case, one flaky interaction, one pixel off — and my instincts go: reproduce, isolate, verify, fix.
+              Ear training is just regression testing for sound.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn btn--primary" href="#trainer-en">Start the test</a>
+              <a class="btn btn--ghost" href="#story">My story</a>
+            </div>
+          </div>
+
+          <div class="langView langView--he" lang="he" dir="rtl">
+            <h1 class="h1">בודקים אוזן ב-60 שניות — ואז מגלים כמה “שמיעה פנימית” יש לכם באמת.</h1>
+            <p class="lead measure">
+              אני קיריל. שנים חפרתי על טכניקה בגיטרה… ואז הבנתי משהו מצחיק:
+              לא משנה כמה האצבעות מהירות — אם האוזן לא “מדברת”, אתה עדיין מנחש.
+              פה עושים בדיקה קצרה וכיפית ומתחילים לאמן את השריר הכי חשוב במוזיקה: האוזן.
+            </p>
+
+            <p class="qaNote measure">
+              מוזיקה אימנה לי את המוח של QA הרבה לפני שהיה לזה שם:
+              האוזן היא “טסטר” בזמן אמת. אם משהו קצת לא מדויק — אני מרגיש.
+              בדיוק כמו בבאגים: משהו קטן “לא יושב” → משחזר, מבודד, מאמת, מתקן.
+              אימון שמיעה זה פשוט רגרסיה לסאונד: בלי תירוצים, יש תוצאה.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn btn--primary" href="#trainer-he">יאללה, בודקים</a>
+              <a class="btn btn--ghost" href="#story">הסיפור שלי</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero__media" aria-label="Hero media">
+          <figure class="mediaCard">
+            <img class="mediaCard__img" src="media/hero.jpeg" alt="Kirill playing guitar" loading="eager" />
+            <figcaption class="mediaCard__cap">
+              <span class="capTitle">Kirill Kovalevski</span>
+              <span class="capSub">Guitar • Ear Training • Precision</span>
+            </figcaption>
+          </figure>
+        </aside>
+      </section>
+
+      <!-- Trainer + Story (2 columns). Benchmark wall moved into LEFT column to fill space. -->
+      <section class="wrap grid2" id="trainer">
+        <div class="panel prose">
+          <div class="langView langView--en" id="trainer-en">
+            <h2 class="h2">Ear Trainer</h2>
+            <p class="muted measure">
+              One note plays. You name it. The goal isn’t “perfect pitch” — it’s fast recognition under pressure.
+            </p>
+
+            <p class="qaNote measure">
+              This is a tiny test harness for your ear: you get an input (sound), you commit to an output (note),
+              and you get immediate feedback. When you miss, you don’t “cope” — you adjust the process.
+              That exact loop is why QA fits me.
+            </p>
+
+            <ol class="how measure">
+              <li><strong>Press “Play”.</strong> (On mobile, the first press enables audio.)</li>
+              <li><strong>Choose the note</strong> you heard.</li>
+              <li><strong>Press “Next”</strong> to keep the streak going.</li>
+            </ol>
+
+            <div class="trainer" data-trainer="en">
+              <div class="trainer__top" role="group" aria-label="Trainer controls">
+                <button class="btn btn--primary" type="button" data-action="play">Play</button>
+                <button class="btn btn--ghost" type="button" data-action="replay" disabled>Again</button>
+                <button class="btn btn--ghost" type="button" data-action="new" disabled>Next</button>
+                <button class="btn btn--ghost" type="button" data-action="reset">Reset</button>
+              </div>
+
+              <div class="stats" aria-label="Scoreboard">
+                <div class="stat">
+                  <div class="stat__k">Score</div>
+                  <div class="stat__v"><span data-out="score">0</span>%</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Correct</div>
+                  <div class="stat__v"><span data-out="correct">0</span>/<span data-out="total">0</span></div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Streak</div>
+                  <div class="stat__v"><span data-out="streak">0</span></div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Best</div>
+                  <div class="stat__v"><span data-out="best">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="prompt" role="status" aria-live="polite" data-out="prompt"></div>
+
+              <div class="noteGrid" role="group" aria-label="Note choices">
+                <button class="noteBtn" type="button" data-note="C" disabled>C</button>
+                <button class="noteBtn" type="button" data-note="C#" disabled>C#</button>
+                <button class="noteBtn" type="button" data-note="D" disabled>D</button>
+                <button class="noteBtn" type="button" data-note="D#" disabled>D#</button>
+                <button class="noteBtn" type="button" data-note="E" disabled>E</button>
+                <button class="noteBtn" type="button" data-note="F" disabled>F</button>
+                <button class="noteBtn" type="button" data-note="F#" disabled>F#</button>
+                <button class="noteBtn" type="button" data-note="G" disabled>G</button>
+                <button class="noteBtn" type="button" data-note="G#" disabled>G#</button>
+                <button class="noteBtn" type="button" data-note="A" disabled>A</button>
+                <button class="noteBtn" type="button" data-note="A#" disabled>A#</button>
+                <button class="noteBtn" type="button" data-note="B" disabled>B</button>
+              </div>
+
+              <div class="trainer__meta">
+                <label class="switch">
+                  <input type="checkbox" data-action="assist" />
+                  <span class="switch__ui" aria-hidden="true"></span>
+                  <span class="switch__txt">Assist mode (plays A=440 first)</span>
+                </label>
+
+                <label class="range">
+                  <span class="range__txt">Difficulty</span>
+                  <input type="range" min="0" max="2" step="1" value="1" data-action="difficulty" aria-label="Difficulty" />
+                  <span class="range__pill" data-out="difficultyLabel">Standard</span>
+                </label>
+              </div>
+
+              <div class="helpPanel" data-out="help">
+                <h3 class="helpTitle">How to use this</h3>
+                <div class="helpBody">
+                  <p class="measure">
+                    This is a practical ear-reaction test. The goal is to reduce guessing: learn faster, correct faster, improvise cleaner.
+                  </p>
+                  <p class="measure">
+                    <strong>Assist:</strong> plays A=440 first (a reference note). Use it to anchor your ear, then turn it off.
+                  </p>
+                  <p class="measure">
+                    <strong>Difficulty:</strong> Easy removes sharps. Hard adds octave shifts (same note name, different height).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="langView langView--he" id="trainer-he" lang="he" dir="rtl">
+            <h2 class="h2">מאמן שמיעה</h2>
+            <p class="muted measure">
+              נשמע תו אחד. אתם מזהים אותו. המטרה היא לא “שמיעה אבסולוטית” — אלא זיהוי מהיר תחת לחץ.
+            </p>
+
+            <p class="qaNote measure">
+              זה Harness קטן לאוזן: קלט (צליל), החלטה (תו), ותוצאה מיידית.
+              כשמפספסים — לא “זורמים” — משפרים את התהליך.
+              אותו לופ בדיוק הוא QA.
+            </p>
+
+            <ol class="how measure">
+              <li><strong>לוחצים “נגן”.</strong> (בנייד, הלחיצה הראשונה מפעילה אודיו.)</li>
+              <li><strong>בוחרים את התו</strong> ששמעתם.</li>
+              <li><strong>לוחצים “הבא”</strong> כדי להמשיך את הרצף.</li>
+            </ol>
+
+            <div class="trainer" data-trainer="he">
+              <div class="trainer__top" role="group" aria-label="פקדי המאמן">
+                <button class="btn btn--primary" type="button" data-action="play">נגן</button>
+                <button class="btn btn--ghost" type="button" data-action="replay" disabled>שוב</button>
+                <button class="btn btn--ghost" type="button" data-action="new" disabled>הבא</button>
+                <button class="btn btn--ghost" type="button" data-action="reset">איפוס</button>
+              </div>
+
+              <div class="stats" aria-label="לוח ניקוד">
+                <div class="stat">
+                  <div class="stat__k">ניקוד</div>
+                  <div class="stat__v"><span data-out="score">0</span>%</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">נכון</div>
+                  <div class="stat__v"><span data-out="correct">0</span>/<span data-out="total">0</span></div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">רצף</div>
+                  <div class="stat__v"><span data-out="streak">0</span></div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">שיא</div>
+                  <div class="stat__v"><span data-out="best">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="prompt" role="status" aria-live="polite" data-out="prompt"></div>
+
+              <div class="noteGrid" role="group" aria-label="בחירת תו">
+                <button class="noteBtn" type="button" data-note="C" disabled>C</button>
+                <button class="noteBtn" type="button" data-note="C#" disabled>C#</button>
+                <button class="noteBtn" type="button" data-note="D" disabled>D</button>
+                <button class="noteBtn" type="button" data-note="D#" disabled>D#</button>
+                <button class="noteBtn" type="button" data-note="E" disabled>E</button>
+                <button class="noteBtn" type="button" data-note="F" disabled>F</button>
+                <button class="noteBtn" type="button" data-note="F#" disabled>F#</button>
+                <button class="noteBtn" type="button" data-note="G" disabled>G</button>
+                <button class="noteBtn" type="button" data-note="G#" disabled>G#</button>
+                <button class="noteBtn" type="button" data-note="A" disabled>A</button>
+                <button class="noteBtn" type="button" data-note="A#" disabled>A#</button>
+                <button class="noteBtn" type="button" data-note="B" disabled>B</button>
+              </div>
+
+              <div class="trainer__meta">
+                <label class="switch">
+                  <input type="checkbox" data-action="assist" />
+                  <span class="switch__ui" aria-hidden="true"></span>
+                  <span class="switch__txt">מצב עזרה (מנגן קודם A=440)</span>
+                </label>
+
+                <label class="range">
+                  <span class="range__txt">קושי</span>
+                  <input type="range" min="0" max="2" step="1" value="1" data-action="difficulty" aria-label="קושי" />
+                  <span class="range__pill" data-out="difficultyLabel">סטנדרטי</span>
+                </label>
+              </div>
+
+              <div class="helpPanel" data-out="help">
+                <h3 class="helpTitle">איך משתמשים בזה</h3>
+                <div class="helpBody">
+                  <p class="measure">
+                    זה מבחן תגובה שמיעתי פרקטי. המטרה היא להפסיק לנחש: ללמוד מהר יותר, לתקן מהר יותר, ולאלתר נקי יותר.
+                  </p>
+                  <p class="measure">
+                    <strong>מצב עזרה:</strong> מנגן A=440 קודם (תו ייחוס). תתחילו איתו ואז תכבו.
+                  </p>
+                  <p class="measure">
+                    <strong>קושי:</strong> קל מבטל דיאזים. קשה מוסיף קפיצות אוקטבה (אותו שם תו, “גובה” שונה).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider" role="separator" aria-hidden="true"></div>
+
+          <div class="langView langView--en" id="bench">
+            <h2 class="h2">Benchmark wall</h2>
+            <p class="muted measure">
+              Only artists with <strong>publicly documented</strong> absolute/perfect pitch are shown here — no guessing, no “maybe”.
+            </p>
+            <p class="qaNote measure">
+              I treat every release like a live concert: one wrong note is one failing test — and I don’t ship until it plays clean.
+            </p>
+            <div class="bench" data-bench="en"></div>
+          </div>
+
+          <div class="langView langView--he" id="bench-he" lang="he" dir="rtl">
+            <h2 class="h2">קיר השוואה</h2>
+            <p class="muted measure">
+              כאן מופיעים רק אמנים עם <strong>תיעוד פומבי</strong> של שמיעה אבסולוטית/מושלמת — בלי ניחושים ובלי “אולי”.
+            </p>
+            <p class="qaNote measure">
+              אני מתייחס לכל גרסה כמו להופעה חיה: תו מזייף אחד = טסט שנכשל — ולא משחרר עד שזה מנגן נקי.
+            </p>
+            <div class="bench" data-bench="he"></div>
+          </div>
+        </div>
+
+        <div class="panel prose" id="story">
+          <div class="langView langView--en">
+            <h2 class="h2">My musical journey</h2>
+
+            <div class="measure storyLong">
+              <p class="muted">
+                I didn’t start as the “ear guy.” I was the technique guy. If there was a problem, my instinct was to solve it with more reps:
+                tighter picking, cleaner transitions, stricter timing. For years that worked — it made me sharper.
+              </p>
+
+              <p class="muted">
+                But eventually I hit the ceiling that technique can’t break: you can’t play what you can’t clearly hear in your head.
+                I’d be mid-jam or mid-improv and realize I was still guessing. Not randomly — educated guessing — but still guessing.
+                And the frustration wasn’t that I made mistakes. It was that I couldn’t always explain <em>why</em> I made them,
+                or how to fix them quickly and consistently.
+              </p>
+
+              <p class="muted">
+                That’s when ear training became the lever. Not “party trick perfect pitch,” but practical recognition:
+                hear something, name it, correct it fast, and keep moving. Once I started treating ear training like a measurable skill,
+                everything got cleaner: phrasing, confidence, timing, and my ability to learn songs faster without brute memorization.
+              </p>
+
+              <p class="muted">
+                QA feels natural to me for the same reason: I don’t like “it kinda works.”
+                In music, a note is either right or wrong. In QA, a behavior is either within spec or it isn’t.
+                The job is to build a process that catches mistakes early — like having a sharp ear, but for software.
+              </p>
+
+              <p class="qaNote">
+                In QA, the best people stay calm under ambiguity and don’t lie to themselves.
+                In music, it’s the same: you either recognized the note — or you didn’t. Then you improve the process.
+              </p>
+            </div>
+
+            <figure class="storyMedia">
+              <img src="media/band.jpeg" alt="Kirill performing" loading="lazy" />
+              <figcaption>Live playing: where ear decisions happen in real time.</figcaption>
+            </figure>
+
+            <video class="storyVideo" src="media/kirill-playing.mp4" muted loop playsinline controls preload="metadata"></video>
+
+            <div class="callout">
+              <div class="callout__body measure">
+                You don’t need perfect pitch — but training your inner ear upgrades confidence, timing, and expression.
+              </div>
+            </div>
+          </div>
+
+          <div class="langView langView--he" lang="he" dir="rtl">
+            <h2 class="h2">המסע המוזיקלי שלי</h2>
+
+            <div class="measure storyLong">
+              <p class="muted">
+                אני לא התחלתי כ“איש האוזן”. התחלתי כ“איש הטכניקה”.
+                אם הייתה בעיה — הפתרון שלי היה עוד חזרות: פריטה יותר נקייה, מעברים יותר חלקים, קצב יותר יציב.
+                שנים זה עבד וזה באמת חידד אותי.
+              </p>
+
+              <p class="muted">
+                ואז מגיעים לתקרה שטכניקה לבד לא שוברת:
+                אי אפשר לנגן משהו שהראש לא “שומע” בצורה ברורה.
+                באמצע ג’אם או אילתור הייתי קולט שאני עדיין מנחש.
+                לא ניחוש אקראי — ניחוש “חכם” — אבל עדיין ניחוש.
+                ומה שהציק לי זה לא הטעויות, אלא שלא תמיד ידעתי להסביר בדיוק <em>למה</em> זה קרה,
+                ואיך לתקן מהר ובצורה עקבית.
+              </p>
+
+              <p class="muted">
+                פה שמיעה הפכה למינוף.
+                לא “טריק של שמיעה אבסולוטית”, אלא זיהוי פרקטי:
+                לשמוע משהו, לקרוא לו בשם, לתקן מהר, ולהמשיך.
+                כשמתייחסים לשמיעה כמיומנות שניתנת למדידה ושיפור — הכול נהיה נקי יותר:
+                ביטחון, טיימינג, ביטוי, ומהירות לימוד של שירים בלי “שינון בכוח”.
+              </p>
+
+              <p class="muted">
+                וזה בדיוק למה QA יושב עליי:
+                אני לא אוהב “בערך עובד”.
+                במוזיקה תו הוא או נכון או לא. ב-QA התנהגות היא או לפי spec או לא.
+                כל הקסם זה לבנות תהליך שמאתר טעויות מוקדם — כמו אוזן חדה, רק לתוכנה.
+              </p>
+
+              <p class="qaNote">
+                ב-QA הטובים לא משקרים לעצמם — הם בודקים. במוזיקה זה אותו דבר:
+                או שזיהית את התו, או שלא. ואז משפרים את התהליך.
+              </p>
+            </div>
+
+            <figure class="storyMedia">
+              <img src="media/band.jpeg" alt="קיריל מופיע" loading="lazy" />
+              <figcaption>נגינה חיה: המקום שבו החלטות שמיעה קורות בזמן אמת.</figcaption>
+            </figure>
+
+            <video class="storyVideo" src="media/demo.mp4" muted loop playsinline controls preload="metadata"></video>
+
+            <div class="callout">
+              <div class="callout__body measure">
+                לא חייבים שמיעה אבסולוטית — אבל אימון שמיעה פנימית משדרג ביטחון, קצב וביטוי.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="panel footerPanel prose">
+          <div class="contact">
+            <div class="langView langView--en">
+              <h2 class="h2 contact__title">Contact</h2>
+              <p class="muted contact__sub measure">If you want a quick walkthrough, I’ll gladly demo it live.</p>
+
+              <p class="qaNote measure">
+                If you’re hiring QA: I’m the type who treats “weird behavior” like a wrong note — I don’t ignore it.
+                I reproduce it, write it down, stress the edge cases, and keep iterating until it’s stable.
+              </p>
+
+              <div class="links">
+                <a class="link" href="https://github.com/quality-krl" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="link" href="https://www.linkedin.com/in/kirill-kovalevski-b6a258257/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="link" href="mailto:kirillfield94@gmail.com">Email</a>
+              </div>
+            </div>
+
+            <div class="langView langView--he" lang="he" dir="rtl">
+              <h2 class="h2 contact__title">בואו נדבר</h2>
+              <p class="muted contact__sub measure">רוצים הדגמה קצרה? בכיף — אני אציג את זה לייב.</p>
+
+              <p class="qaNote measure">
+                אם אתם מגייסים QA: אני מתייחס ל“משהו מוזר” כמו לתו לא נכון — לא מתעלם.
+                משחזר, מתעד, תופס קצוות, ומשפר עד שזה יציב.
+              </p>
+
+              <div class="links">
+                <a class="link" href="https://github.com/quality-krl" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="link" href="https://www.linkedin.com/in/kirill-kovalevski-b6a258257/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="link" href="mailto:kirillfield94@gmail.com">Email</a>
+              </div>
+            </div>
+          </div>
+
+          <figure class="credMedia">
+            <img src="media/footer.jpg" alt="Kirill's practice or work setup" loading="lazy" />
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="siteFooter" aria-label="Site footer">
+      <div class="wrap siteFooter__inner">
+        <span class="sigLang sigLang--en">Kirill Kovalevski</span>
+        <span class="sigLang sigLang--he" lang="he" dir="rtl">קיריל קובלבסקי</span>
+      </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

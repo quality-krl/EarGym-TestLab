@@ -52,12 +52,23 @@ function getLang() {
   return $("#lang-he")?.checked ? "he" : "en";
 }
 
-function setDocDir() {
+/**
+ * IMPORTANT:
+ * We DO NOT mutate documentElement.dir on mobile switches.
+ * That dir swap is what triggers blank frames / jumps on phone compositors.
+ *
+ * We keep <html dir="ltr"> stable and only update:
+ * - html.lang (for accessibility / screen readers)
+ * - html.dataset.lang (for CSS layout flips you already have)
+ */
+function setDocLang() {
   const lang = getLang();
-  document.documentElement.lang = lang === "he" ? "he" : "en";
-  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  document.documentElement.lang = (lang === "he") ? "he" : "en";
   document.documentElement.dataset.lang = lang;
 }
+
+// Apply initial language ASAP (prevents initial mismatch / flash).
+setDocLang();
 
 function playLangSwitchFx() {
   document.body.classList.remove("langSwap");
@@ -69,28 +80,32 @@ function playLangSwitchFx() {
   }, 650);
 }
 
+function isTouchLike() {
+  const mmHoverNone = window.matchMedia?.("(hover: none)")?.matches;
+  const mmCoarse = window.matchMedia?.("(pointer: coarse)")?.matches;
+  return !!(mmHoverNone || mmCoarse);
+}
+
+function prefersReducedMotion() {
+  return !!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+}
+
 /**
- * FLIP animation (brand + toggle), hardened:
- * - clears transforms before measuring (prevents drift/stuck states)
- * - cancels previous run when toggled quickly
- * - measures only once per frame
+ * FLIP animation (brand + toggle) — desktop only.
+ * On touch devices, transforms + backdrop-filter + layout swap can cause blank paint frames.
  */
 function flipMoveHeader(applyChange) {
   const brand = document.querySelector(".brand");
   const lang = document.querySelector(".lang");
   const els = [brand, lang].filter(Boolean);
 
-  // If nothing to animate: just apply.
+  // Fallback: if nothing to animate, just apply.
   if (els.length === 0) {
     applyChange();
-    setDocDir();
+    setDocLang();
     playLangSwitchFx();
     return;
   }
-
-  // --- FIX: keep scroll stable on mobile during dir/layout swap
-  const x0 = window.scrollX || 0;
-  const y0 = window.scrollY || 0;
 
   // Cancel any prior animation artifacts.
   els.forEach(el => {
@@ -111,20 +126,17 @@ function flipMoveHeader(applyChange) {
     flipMoveHeader._raf2 = null;
   }
 
+  // Measure FIRST positions
   const firstRects = els.map(el => el.getBoundingClientRect());
 
+  // Apply the language change + update dataset/lang for CSS
   applyChange();
-  setDocDir();
-
-  // Re-apply scroll immediately (prevents iOS "jump" on dir/display swap)
-  window.scrollTo(x0, y0);
+  setDocLang();
 
   flipMoveHeader._raf1 = requestAnimationFrame(() => {
-    // keep stable before measuring
-    window.scrollTo(x0, y0);
-
     const lastRects = els.map(el => el.getBoundingClientRect());
 
+    // Invert: move elements back to where they were
     els.forEach((el, i) => {
       const dx = firstRects[i].left - lastRects[i].left;
       const dy = firstRects[i].top - lastRects[i].top;
@@ -132,10 +144,8 @@ function flipMoveHeader(applyChange) {
       el.style.transform = `translate(${dx}px, ${dy}px)`;
     });
 
+    // Play: animate to natural position
     flipMoveHeader._raf2 = requestAnimationFrame(() => {
-      // keep stable during animation start
-      window.scrollTo(x0, y0);
-
       els.forEach(el => {
         el.style.transition = "transform 520ms cubic-bezier(.2,.9,.2,1)";
         el.style.transform = "translate(0,0)";
@@ -154,28 +164,49 @@ function flipMoveHeader(applyChange) {
   });
 }
 
-
 function initLanguage() {
-  setDocDir();
+  // Ensure initial html[data-lang] is consistent even before any click.
+  setDocLang();
 
-  // Label clicks -> FLIP reliably.
+  const canAnimateHeader = !isTouchLike() && !prefersReducedMotion();
+
+  // Label clicks
   $$(".lang__btn").forEach(lbl => {
     lbl.addEventListener("click", (e) => {
       e.preventDefault();
+
       const target = lbl.getAttribute("data-lang") === "he" ? "he" : "en";
-      flipMoveHeader(() => {
+      const apply = () => {
         $("#lang-he").checked = target === "he";
         $("#lang-en").checked = target !== "he";
-      });
+      };
+
+      if (!canAnimateHeader) {
+        // Touch/mobile: no FLIP transforms (prevents blank frames)
+        apply();
+        setDocLang();
+        playLangSwitchFx();
+        return;
+      }
+
+      // Desktop: FLIP
+      try {
+        flipMoveHeader(apply);
+      } catch {
+        // Hard fallback: never break switching.
+        apply();
+        setDocLang();
+        playLangSwitchFx();
+      }
     });
   });
 
-  // Keyboard / direct changes fallback (no FLIP).
+  // Keyboard / direct changes fallback
   ["lang-en","lang-he"].forEach(id => {
     const r = document.getElementById(id);
     if (!r) return;
     r.addEventListener("change", () => {
-      setDocDir();
+      setDocLang();
       playLangSwitchFx();
     });
   });
@@ -188,20 +219,20 @@ function initLanguage() {
 function buildBenchData() {
   return {
     en: [
-      { name:"Charlie Puth", meta:"Pop / Producer", tag:{t:"Absolute pitch (public demos)", c:"yes"}, link:"https://www.youtube.com/watch?v=6gTmyhRM6k0" },
-      { name:"Jacob Collier", meta:"Multi-instrumentalist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"Charlie Puth", meta:"Producer", tag:{t:"Absolute pitch (public demos)", c:"yes"}, link:"https://www.youtube.com/watch?v=6gTmyhRM6k0" },
+      { name:"Jacob Collier", meta:"Instrumentalist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"Ella Fitzgerald", meta:"Jazz vocalist", tag:{t:"Perfect pitch (documented)", c:"yes"}, link:"https://www.nprillinois.org/2017-04-25/celebrating-the-centennial-of-jazz-legend-ella-fitzgerald" },
       { name:"Mariah Carey", meta:"Vocalist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"Celine Dion", meta:"Vocalist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
-      { name:"Yngwie Malmsteen", meta:"Guitarist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
-      { name:"Wolfgang A. Mozart", meta:"Classical composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
-      { name:"Ludwig van Beethoven", meta:"Classical composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"Y. Malmsteen", meta:"Guitarist", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"W. Mozart", meta:"Composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"L. van Beethoven", meta:"Composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"Niccolò Paganini", meta:"Violin virtuoso", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://www.wga.hu/html_m/d/david_a/2/24davida.html" },
     ],
     he: [
       { name:"צ’רלי פות’", meta:"פופ / מפיק", tag:{t:"שמיעה אבסולוטית (הדגמות פומביות)", c:"yes"}, link:"https://www.youtube.com/watch?v=6gTmyhRM6k0" },
       { name:"ג’ייקוב קולייר", meta:"רב-נגן", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
-      { name:"אלה פיצג’רלד", meta:"ג’אז", tag:{t:"שמיעה מושלמת (מתועד)", c:"yes"}, link:"https://www.nprillinois.org/2017-04-25/celebrating-the-centennial-of-jazz-legend-ella-fitzgerald" },
+      { name:"אלה פיצג’רלד", meta:"ג’אז", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://www.nprillinois.org/2017-04-25/celebrating-the-centennial-of-jazz-legend-ella-fitzgerald" },
       { name:"מריה קארי", meta:"זמרת", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"סלין דיון", meta:"זמרת", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"אינגווי מלמסטין", meta:"גיטריסט", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
@@ -218,7 +249,7 @@ function escapeHTML(s) {
   }[c]));
 }
 
-function benchCardHTML(x) {
+function benchCardHTML(x, linkLabel) {
   const fullName = escapeHTML(x.name);
   const fullMeta = escapeHTML(x.meta);
 
@@ -227,7 +258,7 @@ function benchCardHTML(x) {
       <div class="bName" tabindex="0" title="${fullName}" aria-label="${fullName}" data-full="${fullName}">${fullName}</div>
       <div class="bMeta" tabindex="0" title="${fullMeta}" aria-label="${fullMeta}" data-full="${fullMeta}">${fullMeta}</div>
       <div class="bTag is-yes">${escapeHTML(x.tag.t)}</div>
-      <a class="bLink" href="${x.link}" target="_blank" rel="noopener noreferrer">Source</a>
+      <a class="bLink" href="${x.link}" target="_blank" rel="noopener noreferrer">${escapeHTML(linkLabel)}</a>
     </div>
   `;
 }
@@ -236,8 +267,9 @@ function renderBench() {
   const data = buildBenchData();
   const enWrap = document.querySelector("[data-bench='en']");
   const heWrap = document.querySelector("[data-bench='he']");
-  if (enWrap) enWrap.innerHTML = data.en.map(benchCardHTML).join("");
-  if (heWrap) heWrap.innerHTML = data.he.map(benchCardHTML).join("");
+
+  if (enWrap) enWrap.innerHTML = data.en.map(x => benchCardHTML(x, "Source")).join("");
+  if (heWrap) heWrap.innerHTML = data.he.map(x => benchCardHTML(x, "מקור")).join("");
 }
 
 /**
@@ -260,7 +292,6 @@ function initBenchTouchTooltips() {
       return;
     }
 
-    // Toggle only this card; close others.
     const isOpen = card.classList.contains("is-open");
     closeAll();
     if (!isOpen) card.classList.add("is-open");

@@ -582,7 +582,9 @@ html[data-lang="he"] .brand__text{ text-align:right; }
   line-height:1.15;
   text-align:center;
 
-  display:-webkit-box;
+  display:flex;
+  align-items:center;
+  justify-content: center;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
   overflow:hidden;
@@ -671,8 +673,9 @@ html[data-lang="he"] .brand__text{ text-align:right; }
   opacity:1;
 }
 
-html[dir="rtl"] .bName[data-full]::after,
-html[dir="rtl"] .bMeta[data-full]::after{
+/* Direction for tooltip content when Hebrew is active */
+html[data-lang="he"] .bName[data-full]::after,
+html[data-lang="he"] .bMeta[data-full]::after{
   direction: rtl;
 }
 
@@ -727,9 +730,13 @@ html[dir="rtl"] .bMeta[data-full]::after{
 }
 .credMedia img{width:100%; height:auto}
 
+/* =========================================================
+   LANGUAGE VISIBILITY — RADIO-DRIVEN (prevents blank frames)
+   ========================================================= */
+
 .langView{display:none}
-html[data-lang="en"] .langView--en{display:block}
-html[data-lang="he"] .langView--he{display:block}
+#lang-en:checked ~ .main .langView--en{display:block}
+#lang-he:checked ~ .main .langView--he{display:block}
 
 .siteFooter{
   padding: 0 0 calc(18px + var(--safeBottom));
@@ -763,8 +770,8 @@ html[data-lang="he"] .langView--he{display:block}
 }
 
 .sigLang{display:none}
-html[data-lang="en"] .sigLang--en{display:inline-flex}
-html[data-lang="he"] .sigLang--he{display:inline-flex}
+#lang-en:checked ~ .siteFooter .sigLang--en{display:inline-flex}
+#lang-he:checked ~ .siteFooter .sigLang--he{display:inline-flex}
 
 :focus-visible{outline:none; box-shadow:var(--focus); border-radius:14px}
 
@@ -799,5 +806,6 @@ html[data-lang="he"] .sigLang--he{display:inline-flex}
   #lang-he:checked ~ .topbar .lang__pill{transform:translateX(48px)}
 }
 
+/* Keep scroll anchoring from fighting layout swaps */
 html, body { overflow-anchor: none; }
 .langView { overflow-anchor: none; }

@@ -1,3 +1,4 @@
+/* styles.css */
 :root{
   --ink:#0B0500;
   --green:#00A878;
@@ -509,6 +510,64 @@ html[data-lang="he"] .brand__text{ text-align:right; }
   padding:12px;
 }
 .callout__body{color:var(--muted); font-weight:900; margin:0}
+
+/* =========================================================
+   FILLER BLOCK (to remove “empty space” in story panel)
+   ========================================================= */
+.learnFill{
+  margin-top: 14px;
+  padding: 14px 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(216,241,160,.18);
+  background:
+    radial-gradient(700px 220px at 30% 0%, rgba(0,168,120,.10), rgba(0,0,0,0) 60%),
+    linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+}
+
+.learnFill__title{
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+  font-weight: 950;
+  letter-spacing: .01em;
+  opacity: .95;
+  text-align: center;
+}
+
+.learnFill__p{
+  margin: 0 0 12px;
+  color: rgba(255,255,255,.78);
+  font-weight: 900;
+  line-height: 1.55;
+  text-align: center;
+  max-inline-size: 62ch;
+  margin-inline: auto;
+}
+
+.learnFill__list{
+  margin: 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 10px;
+  color: rgba(255,255,255,.74);
+  font-weight: 900;
+}
+
+.learnFill__list li{
+  line-height: 1.5;
+}
+
+.learnFill__list b{
+  color: rgba(216,241,160,.90);
+}
+
+.learnFill__tip{
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  color: rgba(243,193,120,.82);
+  font-weight: 950;
+  text-align: center;
+}
 
 /* =========================================================
    BENCHMARK WALL — HARD LOCK (single authoritative block)

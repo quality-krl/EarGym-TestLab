@@ -228,6 +228,11 @@ function buildBenchData() {
       { name:"W. Mozart", meta:"Composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"L. van Beethoven", meta:"Composer", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"Niccolò Paganini", meta:"Violin virtuoso", tag:{t:"Absolute pitch (documented)", c:"yes"}, link:"https://www.wga.hu/html_m/d/david_a/2/24davida.html" },
+
+      // +3 added
+      { name:"Stevie Wonder", meta:"Singer / multi-instrumentalist", tag:{t:"Perfect pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"Jimi Hendrix", meta:"Guitarist", tag:{t:"Perfect pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"Michael Jackson", meta:"Vocalist / performer", tag:{t:"Perfect pitch (documented)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
     ],
     he: [
       { name:"צ’רלי פות’", meta:"פופ / מפיק", tag:{t:"שמיעה אבסולוטית (הדגמות פומביות)", c:"yes"}, link:"https://www.youtube.com/watch?v=6gTmyhRM6k0" },
@@ -239,6 +244,11 @@ function buildBenchData() {
       { name:"מוצרט", meta:"מלחין קלאסי", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"לודוויג ואן בטהובן", meta:"מלחין קלאסי", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
       { name:"ניקולו פגניני", meta:"וירטואוז כינור", tag:{t:"שמיעה אבסולוטית (מתועד)", c:"yes"}, link:"https://www.wga.hu/html_m/d/david_a/2/24davida.html" },
+
+      // +3 added
+      { name:"סטיבי וונדר", meta:"זמר / רב-נגן", tag:{t:"שמיעה מושלמת (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"ג’ימי הנדריקס", meta:"גיטריסט", tag:{t:"שמיעה מושלמת (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
+      { name:"מייקל ג’קסון", meta:"זמר / פרפורמר", tag:{t:"שמיעה מושלמת (מתועד)", c:"yes"}, link:"https://en.wikipedia.org/wiki/List_of_people_with_absolute_pitch" },
     ],
   };
 }

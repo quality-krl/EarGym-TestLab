@@ -47,3 +47,24 @@ From the project folder:
 
 ```bash
 python -m http.server 5500
+
+## QA Exploration (Sample)
+
+This project is also used as a QA practice environment.
+
+Example test scenarios:
+
+| Area | Scenario | Expected Result |
+|------|----------|-----------------|
+| Audio | Play reference tone (A4) | Tone plays clearly without distortion |
+| Input | Guess wrong note | UI shows failure feedback and resets state |
+| Language | Switch EN → HE | Layout flips RTL without breaking UI |
+| Storage | Refresh page | Best score persists correctly |
+| Touch UX | Tap outside tooltip | Tooltip closes reliably |
+
+Known edge cases explored:
+- RTL direction mutation causing blank frames on mobile  
+- AudioContext resume on iOS  
+- LocalStorage per-language isolation  
+
+
